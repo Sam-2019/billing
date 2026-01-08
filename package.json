@@ -1,0 +1,43 @@
+{
+  "name": "express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "bun --env-file=env/.admin.prod.env api/index.js",
+    "dev": "nodemon --env-file=env/.admin.dev.env api/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ladjs/graceful": "^4.2.0",
+    "bcrypt": "^6.0.0",
+    "bree": "^9.2.7",
+    "compression": "^1.8.1",
+    "connect-mongo": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.1",
+    "express-request-id": "^3.0.0",
+    "express-session": "^1.18.2",
+    "mongoose": "^8.21.0",
+    "path": "^0.12.7",
+    "request-received": "^0.0.3",
+    "response-time": "^2.3.4",
+    "ros-client": "^1.1.2"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.0.6",
+    "@faker-js/faker": "^9.9.0",
+    "@types/debug": "^4.1.12",
+    "@types/express": "^5.0.6",
+    "nodemon": "^3.1.11"
+  },
+  "resolutions": {
+    "@tiptap/core": "2.22.3",
+    "@tiptap/pm": "2.22.3"
+  }
+}
