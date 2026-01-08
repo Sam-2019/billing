@@ -3,7 +3,7 @@ import Graceful from "@ladjs/graceful";
 import { ntfy } from "../alerts/ntfy.js";
 import { connectDB } from "../db/index.js";
 import { getActiveTopup } from "../db/repository/topup.js";
-import { getMember } from "../db/repository/membership.js";
+// import { getMember } from "../db/repository/membership.js";
 import { getUser, resetCounter } from "../mikrotik/index.js";
 import { getSelectedPlan, parseUptimeToSeconds } from "../../config/constants.js";
 
@@ -22,7 +22,7 @@ const resetAccount = async () => {
     if (!customer) return;
 
     // grab member info
-    const profile = await getMember(customer.credentials)
+    // const profile = await getMember(customer.credentials)
     const userName = customer?.credentials?.userName;
 
     const plan = customer?.subscriptionPlan;
@@ -42,9 +42,7 @@ const resetAccount = async () => {
       fullName: customer?.fullName,
     };
 
-  
     // use grabbed member info
-
     if (userUptimeSeconds < planUptimeSeconds) return;
 
     const state = await resetCounter(userInfo.id);
