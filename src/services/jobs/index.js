@@ -18,11 +18,11 @@ async function startBree() {
         timeout: false,
         interval: "3m",
       },
-      // {
-      //   name: "provisionMember",
-      //   timeout: false,
-      //   interval: "3m",
-      // },
+      {
+        name: "provisionMember",
+        timeout: false,
+        interval: "3m",
+      },
     ],
     logger: console,
   });
