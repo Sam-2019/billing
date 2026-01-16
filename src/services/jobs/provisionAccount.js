@@ -40,9 +40,7 @@ const provisionAccount = async () => {
       customer.profileCreated = true;
       customer.mktID = customerStatus?.id;
       await customer.save();
-      await ntfy({
-        payload: `👍🏾 Profile updated ${results?.userName} - ${customerStatus?.id}`,
-      });
+      await ntfy({payload: `👍🏾 Profile updated ${results?.userName} - ${customerStatus?.id}`});
       return;
     }
 
@@ -50,9 +48,7 @@ const provisionAccount = async () => {
     customer.profileCreated = true;
     customer.mktID = createdUser?.id;
     await customer.save();
-    await ntfy({
-      payload: `👍🏾 Account Provision: ${customer?.fullName} - ${results?.userName}`,
-    });
+    await ntfy({payload: `👍🏾 Account Provision: ${customer?.fullName} - ${results?.userName}`});
   } catch (error) {
     const message = `🤬 Account Provision: ${error}`;
     await ntfy({ payload: message });

@@ -1,4 +1,5 @@
 import RouterOSClient from "ros-client";
+import { ntfy } from "../alerts/ntfy.js";
 import { config } from "../../config/index.js";
 
 const mikrotikCredentials = {
@@ -35,7 +36,8 @@ const pingMikrotik = async () => {
   try {
     return await api.connect();
   } catch (err) {
-    throw err.message;
+    console.error({ "err": err.message })
+    await ntfy({ payload: "MIKROTIK PING FAILED" });
   }
 };
 
@@ -46,7 +48,8 @@ const getUsers = async () => {
     await api.close();
     return users;
   } catch (err) {
-    throw err.message;
+    console.error({ "err": err.message })
+    await ntfy({ payload: "MIKROTIK PING FAILED" });
   }
 };
 
@@ -64,7 +67,8 @@ const getUser = async (userName) => {
     }
     return modifiedUser(user);
   } catch (err) {
-    throw err.message;
+    console.error({ "err": err.message })
+    await ntfy({ payload: "MIKROTIK PING FAILED" });
   }
 };
 
@@ -78,7 +82,8 @@ const disableUser = async (userName) => {
     ]);
     await api.close();
   } catch (err) {
-    throw err.message;
+    console.error({ "err": err.message })
+    await ntfy({ payload: "MIKROTIK PING FAILED" });
   }
 };
 
@@ -92,7 +97,8 @@ const enableUser = async (userName) => {
     ]);
     await api.close();
   } catch (err) {
-    throw err.message;
+    console.error({ "err": err.message })
+    await ntfy({ payload: "MIKROTIK PING FAILED" });
   }
 };
 
@@ -103,7 +109,8 @@ const resetCounter = async (userID) => {
     await api.close();
     return true;
   } catch (err) {
-    throw err.message;
+    console.error({ "err": err.message })
+    await ntfy({ payload: "MIKROTIK PING FAILED" });
   }
 };
 
@@ -126,7 +133,8 @@ const createUser = async (userData) => {
     await api.close();
     return modifiedUser(user);
   } catch (err) {
-    throw err.message;
+    console.error({ "err": err.message })
+    await ntfy({ payload: "MIKROTIK PING FAILED" });
   }
 };
 
