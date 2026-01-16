@@ -3,8 +3,8 @@ import process from "node:process";
 import Graceful from "@ladjs/graceful";
 import { ntfy } from "../alerts/ntfy.js";
 import { connectDB } from "../db/index.js";
+import { dataPlans } from "../../config/constants.js";
 import { createUser, getUser } from "../mikrotik/index.js";
-import { getSelectedPlan } from "../../config/constants.js";
 import { findCustomerSale } from "../db/repository/sale.js";
 import { getUnprovisionMember } from "../db/repository/membership.js";
 
@@ -25,7 +25,7 @@ const provisionMember = async () => {
         const sale = await findCustomerSale(member);
         if (!sale) return;
 
-        const selectedPlan = getSelectedPlan(sale?.subscriptionPlan);
+        const selectedPlan = dataPlans.MEMBERSHIP;
         const results = {
             userName: member?.credentials?.userName,
             password: member?.credentials?.password,
@@ -38,6 +38,7 @@ const provisionMember = async () => {
         const memberStatus = await getUser(results?.userName);
 
         if (memberStatus && member?.profileCreated === false) {
+            console.log("exists")
             member.profileCreated = true;
             member.mktID = memberStatus?.id;
             await member.save();

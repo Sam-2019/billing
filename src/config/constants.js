@@ -129,5 +129,5 @@ export {
   componentPath,
   getSelectedPlan,
   internalServerError,
-  parseUptimeToSeconds,
+  parseUptimeToSeconds
 };
