@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "bun --env-file=env/.admin.prod.env api/index.js",
-    "dev": "nodemon --env-file=env/.admin.dev.env api/index.js"
+    "start": "bun --env-file=env/.prod.env api/index.js",
+    "dev": "nodemon --env-file=env/.dev.env api/index.js"
   },
   "keywords": [],
   "author": "",
@@ -15,7 +15,7 @@
   "dependencies": {
     "@ladjs/graceful": "^4.2.0",
     "bcrypt": "^6.0.0",
-    "bree": "^9.2.7",
+    "bree": "^9.2.8",
     "compression": "^1.8.1",
     "connect-mongo": "^5.1.0",
     "cors": "^2.8.5",
