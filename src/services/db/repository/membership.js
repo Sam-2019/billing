@@ -25,7 +25,7 @@ const getDisabledMember = async () => {
 };
 
 const getUnprovisionMember = async () => {
-  return await Membership.findOne({ profileCreated: "false" }).lean();
+  return await Membership.findOne({ profileCreated: "false" });
 };
 
 export { getMemberships, getMember, addMembership, getActiveMember, getDisabledMember, getUnprovisionMember };
