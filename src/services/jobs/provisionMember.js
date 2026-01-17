@@ -53,7 +53,7 @@ const provisionMember = async () => {
         member.mktID = user?.id;
         await member.save();
         await ntfy({
-            payload: `👍🏾 Member Provisioned: ${customer?.fullName} - ${results?.userName}`,
+            payload: `👍🏾 Member Provisioned: ${member?.fullName} - ${results?.userName} - ${user?.id}`,
         });
 
     } catch (error) {
