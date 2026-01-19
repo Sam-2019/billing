@@ -37,7 +37,7 @@ const pingMikrotik = async () => {
     return await api.connect();
   } catch (err) {
     console.error({ "err": err.message })
-    await ntfy({ payload: "MIKROTIK PING FAILED" });
+    await ntfy({ payload: "MIKROTIK: PING FAILED" });
   }
 };
 
@@ -49,7 +49,7 @@ const getUsers = async () => {
     return users;
   } catch (err) {
     console.error({ "err": err.message })
-    await ntfy({ payload: "MIKROTIK PING FAILED" });
+    await ntfy({ payload: "MIKROTIK: PING FAILED" });
   }
 };
 
@@ -68,7 +68,7 @@ const getUser = async (userName) => {
     return modifiedUser(user);
   } catch (err) {
     console.error({ "err": err.message })
-    await ntfy({ payload: "MIKROTIK PING FAILED" });
+    await ntfy({ payload: "MIKROTIK: PING FAILED" });
   }
 };
 
@@ -83,7 +83,7 @@ const disableUser = async (userName) => {
     await api.close();
   } catch (err) {
     console.error({ "err": err.message })
-    await ntfy({ payload: "MIKROTIK PING FAILED" });
+    await ntfy({ payload: "MIKROTIK: PING FAILED" });
   }
 };
 
@@ -98,7 +98,7 @@ const enableUser = async (userName) => {
     await api.close();
   } catch (err) {
     console.error({ "err": err.message })
-    await ntfy({ payload: "MIKROTIK PING FAILED" });
+    await ntfy({ payload: "MIKROTIK: PING FAILED" });
   }
 };
 
@@ -110,7 +110,7 @@ const resetCounter = async (userID) => {
     return true;
   } catch (err) {
     console.error({ "err": err.message })
-    await ntfy({ payload: "MIKROTIK PING FAILED" });
+    await ntfy({ payload: "MIKROTIK: PING FAILED" });
   }
 };
 
@@ -134,7 +134,7 @@ const createUser = async (userData) => {
     return modifiedUser(user);
   } catch (err) {
     console.error({ "err": err.message })
-    await ntfy({ payload: "MIKROTIK PING FAILED" });
+    await ntfy({ payload: "MIKROTIK: PING FAILED" });
   }
 };
 
