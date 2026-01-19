@@ -43,7 +43,7 @@ const provisionMember = async () => {
             member.mktID = memberStatus?.id;
             await member.save();
             await ntfy({
-                payload: `👍🏾 Member updated ${results?.userName} - ${memberStatus?.id}`,
+                payload: `👍🏾 Member updated: ${results?.userName} - ${memberStatus?.id}`,
             });
             return;
         }
