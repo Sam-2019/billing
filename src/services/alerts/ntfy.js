@@ -14,7 +14,6 @@ const setupAlert = (title, message) => {
 
 export const ntfy = async ({ payload }) => {
   if (!config.notify.uri || !config.notify.topic || !config.notify.auth) return;
-  if (!route) return;
   if (!payload) return;
 
   if (!payload) {
