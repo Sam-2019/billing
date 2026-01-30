@@ -14,12 +14,7 @@ const setupAlert = (title, message) => {
 
 export const ntfy = async ({ payload }) => {
   if (!config.notify.uri || !config.notify.topic || !config.notify.auth) return;
-  if (!payload) return;
-
-  if (!payload) {
-    console.error("Payload is required for ntfy notification.");
-    return;
-  }
+  if (!payload) return console.error("Payload is required for ntfy notification.");
 
   const beforeColon = /^(.*?)(?=:)/gm;
   const afterColon = /(?<=: )(.*)/gm;
