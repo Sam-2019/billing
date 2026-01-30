@@ -24,6 +24,7 @@
     "express": "^4.22.1",
     "express-request-id": "^3.0.0",
     "express-session": "^1.18.2",
+    "libphonenumber-js": "^1.12.36",
     "mongoose": "^8.21.0",
     "path": "^0.12.7",
     "request-received": "^0.0.3",
