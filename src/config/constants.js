@@ -120,6 +120,7 @@ export {
   httpStatus,
   successful,
   production,
+  smsContent,
   companyName,
   server_down,
   development,
