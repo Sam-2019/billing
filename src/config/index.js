@@ -19,7 +19,13 @@ const config = {
     username: process.env.MIKROTIK_USERNAME,
     password: process.env.MIKROTIK_PASSWORD,
     server: process.env.MIKROTIK_DEFAULT_SERVER || "hotspot1",
-  }
+  },
+    sms: {
+    uri: process.env.SMS_URL,
+    clientid: process.env.SMS_ID,
+    senderid: process.env.SENDER_ID,
+    clientsecret: process.env.SMS_TOKEN,
+  },
 };
 
 export { config };
