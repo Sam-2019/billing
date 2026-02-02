@@ -138,9 +138,37 @@ const createUser = async (userData) => {
   }
 };
 
+const topupUser = async ({userID, limit}) => {
+  const { newLimitUptimeSeconds, duration } = limit;
+  const comment = `Topup ${duration} added on ${new Date().toISOString()}`;
+  
+  try {
+    await api.connect();
+
+    // 4. Update the user record
+    await api.send([ "/ip/hotspot/user/set", `=.id=${userID}`, `=limit-uptime=${newLimitUptimeSeconds}s`, `=comment=${comment}`, ]);
+
+    const active = await api.send([ "/ip/hotspot/active/print", `?user=${userID}`]);
+
+    // if user is active?
+    // remove session
+    if (active.length > 0) {
+      await api.send([ "/ip/hotspot/active/remove", `=.id=${userID}`]);
+      console.log("⚡ Active session refreshed. New limit applied.");
+    }
+
+    await api.close();
+    return true
+  } catch (err) {
+    console.error({ "❌ Top-up Error:": err.message });
+    await ntfy({ payload: "MIKROTIK: ❌ TOP_UP ERROR" });
+  }
+}
+
 export {
   getUser,
   getUsers,
+  topupUser,
   createUser,
   enableUser,
   disableUser,

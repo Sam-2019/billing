@@ -13,6 +13,9 @@ const dataSchema = new Schema(
     transactionId: { type: String },
     externalTransactionId: { type: String },
     status: { type: String, default: "active" },
+    mikrotikTopupDate: { type: Date },
+    uptimeLimitBeforeTopup: { type: String },
+    uptimeLimitAfterTopup: { type: String },
   },
   {
     timestamps: true,

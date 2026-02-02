@@ -23,6 +23,11 @@ async function startBree() {
         timeout: false,
         interval: "3m",
       },
+      {
+        name: "topupMember",
+        timeout: false,
+        interval: "3m",
+      },
     ],
     logger: console,
   });
