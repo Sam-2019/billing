@@ -139,7 +139,7 @@ const createUser = async (userData) => {
 };
 
 const topupUser = async ({userID, limit}) => {
-  const { newLimitUptimeSeconds, duration } = limit;
+  const { duration, newLimitUptimeSeconds } = limit;
   const comment = `Topup ${duration} added on ${new Date().toISOString()}`;
   
   try {

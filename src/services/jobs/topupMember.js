@@ -40,10 +40,13 @@ const topupMember = async () => {
         const newLimitUptimeSeconds = currentLimitUptimeSeconds + planUptimeSeconds;
 
         const limit = { duration: selectedPlanUptime, newLimitUptimeSeconds: newLimitUptimeSeconds };
+        const x = `${currentLimitUptime}/${currentLimitUptimeSeconds}s`;
+        const y = `${selectedPlanUptime}/${planUptimeSeconds}s`;
+
 
         console.log(`📈 Top-up for ${userInfo.fullName}:`);
-        console.log(`   Old Limit: ${currentLimitUptime || "Unlimited"}`);
-        console.log(`   Adding: ${selectedPlanUptime}/${planUptimeSeconds}s`);
+        console.log(`   Old Limit: ${x || "Unlimited"}`);
+        console.log(`   Adding: ${y}`);
         console.log(`   New Limit Uptime: ${newLimitUptimeSeconds}s`);
 
         const state = await topupUser({ userID: user?.id, limit: limit });
