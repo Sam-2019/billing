@@ -13,11 +13,11 @@ async function startBree() {
       //   timeout: false,
       //   interval: "30m",
       // },
-      {
-        name: "resetAccount",
-        timeout: false,
-        interval: "3m",
-      },
+      // {
+      //   name: "resetAccount",
+      //   timeout: false,
+      //   interval: "3m",
+      // },
       {
         name: "provisionMember",
         timeout: false,
