@@ -4,7 +4,7 @@ import { ntfy } from "../alerts/ntfy.js";
 import { connectDB } from "../db/index.js";
 import { getUser, topupUser } from "../mikrotik/index.js";
 import { getActiveTopup } from "../db/repository/topup.js";
-import { getSelectedPlan, parseUptimeToSeconds } from "../../config/constants.js";
+import { dataPlans, getSelectedPlan, parseUptimeToSeconds } from "../../config/constants.js";
 
 const graceful = new Graceful({
     mongooses: [mongoose],
@@ -23,7 +23,7 @@ const topupMember = async () => {
         const userName = customer?.credentials?.userName;
         const selectedPlan = getSelectedPlan(customer?.subscriptionPlan);
         const selectedPlanUptime = selectedPlan?.uptime;
-        const planUptimeSeconds = parseUptimeToSeconds(selectedPlanUptime);
+        const selectedPlanUptimeSeconds = parseUptimeToSeconds(selectedPlanUptime);
 
         const user = await getUser(userName);
         if (!user) return console.error(`Mikrotik: user-${userName} not found`);
@@ -37,17 +37,18 @@ const topupMember = async () => {
             userLimitUptime: currentLimitUptime
         };
 
-        const newLimitUptimeSeconds = currentLimitUptimeSeconds + planUptimeSeconds;
+        const newLimitUptimeSeconds = currentLimitUptimeSeconds + selectedPlanUptimeSeconds;
+        const newLimitUptime = newLimitUptimeSeconds/dataPlans.DAILY.uptimeSeconds
 
         const limit = { duration: selectedPlanUptime, newLimitUptimeSeconds: newLimitUptimeSeconds };
-        const x = `${currentLimitUptime}/${currentLimitUptimeSeconds}s`;
-        const y = `${selectedPlanUptime}/${planUptimeSeconds}s`;
-
+        const oldLimit = `${currentLimitUptime}/${currentLimitUptimeSeconds}s`
+        const topupLimit = `${selectedPlanUptime}/${selectedPlanUptimeSeconds}s`
+        const newLimit = `${newLimitUptime}/${newLimitUptimeSeconds}s`
 
         console.log(`📈 Top-up for ${userInfo.fullName}:`);
-        console.log(`   Old Limit: ${x || "Unlimited"}`);
-        console.log(`   Adding: ${y}`);
-        console.log(`   New Limit Uptime: ${newLimitUptimeSeconds}s`);
+        console.log(`   Old Limit: ${oldLimit || "Unlimited"}`);
+        console.log(`   Adding: ${topupLimit}`);
+        console.log(`   New Limit Uptime: ${newLimit}`);
 
         const state = await topupUser({ userID: user?.id, limit: limit });
         if (state === true) {
