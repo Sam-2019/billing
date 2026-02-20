@@ -4,9 +4,9 @@ import Graceful from "@ladjs/graceful";
 import { ntfy } from "../alerts/ntfy.js";
 import { sendSMS } from "../alerts/sms.js";
 import { connectDB } from "../db/index.js";
-import { dataPlans } from "../../config/constants.js";
 import { createUser, getUser } from "../mikrotik/index.js";
 import { findCustomerSale } from "../db/repository/sale.js";
+import { dataPlans, smsContent } from "../../config/constants.js";
 import { getUnprovisionMember } from "../db/repository/membership.js";
 
 const graceful = new Graceful({
@@ -52,10 +52,8 @@ const provisionMember = async () => {
         member.profileCreated = true;
         member.mktID = user?.id;
         await member.save();
-        await ntfy({
-            payload: `👍🏾 Member Provisioned: ${member?.fullName} - ${results?.userName} - ${user?.id}`,
-        });
-        await sendSMS(member);
+        await sendSMS(member, smsContent.registration);
+        await ntfy({payload: `👍🏾 Member Provisioned: ${member?.fullName} - ${results?.userName} - ${user?.id}`});
 
     } catch (error) {
         const message = `🤬 Account Member: ${error}`;

@@ -2,9 +2,10 @@ import mongoose from "mongoose";
 import Graceful from "@ladjs/graceful";
 import { ntfy } from "../alerts/ntfy.js";
 import { connectDB } from "../db/index.js";
+import { sendSMS } from "../alerts/sms.js";
 import { getUser, topupUser } from "../mikrotik/index.js";
 import { getActiveTopup } from "../db/repository/topup.js";
-import { dataPlans, getSelectedPlan, parseUptimeToSeconds } from "../../config/constants.js";
+import { smsContent, dataPlans, getSelectedPlan, parseUptimeToSeconds } from "../../config/constants.js";
 
 const graceful = new Graceful({
     mongooses: [mongoose],
@@ -58,6 +59,7 @@ const topupMember = async () => {
             customer.uptimeLimitAfterTopup = `${newLimitUptimeSeconds}s`;
             await customer.save();
             const message = `✅ Topup Complete: ${userInfo.fullName} - ${userInfo.userName}`;
+            await sendSMS(member, smsContent.topup);
             await ntfy({ payload: message });
         }
     }

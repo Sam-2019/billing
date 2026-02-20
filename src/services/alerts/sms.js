@@ -1,9 +1,9 @@
 import { config } from "../../config/index.js";
 import { addSms } from "../db/repository/sms.js";
 import parsePhoneNumber from "libphonenumber-js";
-import { smsContent, hubtel } from "../../config/constants.js";
+import { hubtel } from "../../config/constants.js";
 
-export const sendSMS = async (data) => {
+export const sendSMS = async (data, content) => {
   const { senderid, clientid, clientsecret, uri } = config.sms;
   if (
     !senderid ||
@@ -24,7 +24,7 @@ export const sendSMS = async (data) => {
 
   url.searchParams.append("from", senderid);
   url.searchParams.append("clientid", clientid);
-  url.searchParams.append("content", smsContent);
+  url.searchParams.append("content", content);
   url.searchParams.append("to", phoneNumber.number);
   url.searchParams.append("clientsecret", clientsecret);
 
@@ -34,7 +34,7 @@ export const sendSMS = async (data) => {
     if (!results) return;
     const modData = {
       from: senderid,
-      message: smsContent,
+      message: content,
       payload: results,
       provider: hubtel.toUpperCase(),
       mobileNumber: phoneNumber.number,
