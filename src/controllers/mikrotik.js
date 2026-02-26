@@ -1,6 +1,7 @@
 import {
   getUser,
   getUsers,
+  topupUser,
   enableUser,
   createUser,
   disableUser,
@@ -132,6 +133,23 @@ class Mikrotik {
     try {
       await resetCounter(userName);
       res.status(httpStatus.OK).json({ message: "Counter reset successful" });
+    } catch (error) {
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ error: error });
+    }
+  }
+
+  async topUser(req, res) {
+    const results = req.body;
+    if (!results || !results.userName || !results.limit) {
+      return res
+        .status(httpStatus.BAD_REQUEST)
+        .json({ error: "Username / Limit is required" });
+    }
+
+    const { userName, limit } = results;
+    try {
+      await topupUser(userName, limit);
+      res.status(httpStatus.OK).json({ message: "Account topup successful" });
     } catch (error) {
       res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ error: error });
     }

@@ -27,6 +27,11 @@ mikrotikRouter.get("/mikrotik/users", authMiddleware, controller.users);
 // Adds a new user to the Mikrotik hotspot with the provided details
 mikrotikRouter.post("/mikrotik/user/add", authMiddleware, controller.addUser);
 
+// Topup user counter
+// Endpoint: POST /api/mikrotik/user/topup
+// Resets a user's counter to enable new session
+mikrotikRouter.post("/mikrotik/user/topup", authMiddleware, controller.topUser);
+
 // Enable a user
 // Endpoint: POST /api/mikrotik/user/enable
 // Enables the specified user in the Mikrotik hotspot
