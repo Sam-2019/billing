@@ -29,7 +29,8 @@
     "path": "^0.12.7",
     "request-received": "^0.0.3",
     "response-time": "^2.3.4",
-    "ros-client": "^1.1.2"
+    "ros-client": "^1.1.2",
+    "shelljs": "^0.10.0"
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.6",

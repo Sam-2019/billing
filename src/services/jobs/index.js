@@ -28,6 +28,10 @@ async function startBree() {
         timeout: false,
         interval: "3m",
       },
+      {
+        name: "dbBackup",
+        interval: 'at 12:00 am'
+      },
     ],
     logger: console,
   });

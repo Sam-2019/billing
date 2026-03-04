@@ -7,6 +7,7 @@ const config = {
   database: {
     uri: process.env.DB_URL,
     name: process.env.DB_NAME,
+    dir: process.env.DB_DUMP_DIR,
   },
   notify: {
     uri: process.env.NTFY_URL,
