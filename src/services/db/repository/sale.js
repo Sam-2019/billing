@@ -35,6 +35,38 @@ const findCustomerSale = async (data) => {
   });
 };
 
+const findNewCustomerSale = async (data) => {
+  const email = data?.email;
+  const phoneNumber = data?.phoneNumber;
+
+  return await Sale.findOne(
+    {
+      phoneNumber: phoneNumber,
+      email: email,
+      registrationType: "Registration"
+    },
+    excludeItems
+  ).sort({
+    createdAt: -1,
+  });
+};
+
+const findGuestCustomerSale = async (data) => {
+  const email = data?.email;
+  const phoneNumber = data?.phoneNumber;
+
+  return await Sale.findOne(
+    {
+      phoneNumber: phoneNumber,
+      email: email,
+      registrationType: "Guest Registration"
+    },
+    excludeItems
+  ).sort({
+    createdAt: -1,
+  });
+};
+
 const yesterdaySales = async () => {
   const today = new Date();
   const yesterday = new Date(today);
@@ -68,4 +100,6 @@ export {
   todaySales,
   yesterdaySales,
   findCustomerSale,
+  findNewCustomerSale,
+  findGuestCustomerSale
 };
