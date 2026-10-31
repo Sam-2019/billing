@@ -6,8 +6,8 @@ import { sendSMS } from "../alerts/sms.js";
 import { connectDB } from "../db/index.js";
 import { createUser, getUser } from "../mikrotik/index.js";
 import { findCustomerSale } from "../db/repository/sale.js";
-import { dataPlans, smsContent } from "../../config/constants.js";
 import { getUnprovisionMember } from "../db/repository/membership.js";
+import { dataPlans, smsContent, registration } from "../../config/constants.js";
 
 const graceful = new Graceful({
     mongooses: [mongoose],
@@ -52,8 +52,12 @@ const provisionMember = async () => {
         member.profileCreated = true;
         member.mktID = user?.id;
         await member.save();
-        await sendSMS(member, smsContent.registration);
-        await ntfy({payload: `👍🏾 Member Provisioned: ${member?.fullName} - ${results?.userName} - ${user?.id}`});
+        if (sale.registrationType === registration) {
+            await sendSMS(member, smsContent.registration);
+        } else {
+            await sendSMS(member, `${smsContent.guest} Username: ${results?.userName} | Password: ${results?.password}.`);
+        }
+        await ntfy({ payload: `👍🏾 Member Provisioned: ${member?.fullName} - ${results?.userName} - ${user?.id}` });
 
     } catch (error) {
         const message = `🤬 Account Member: ${error}`;

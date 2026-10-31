@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "bun --env-file=env/.prod.env api/index.js",
+    "start": "bun api/index.js",
     "dev": "nodemon --env-file=env/.dev.env api/index.js",
     "biome": "bunx --bun biome format --write ./src"
   },

@@ -21,7 +21,8 @@ const componentPath = "src/ui/components/";
 const internalServerError = "Internal Server Error";
 const smsContent = {
   "topup": "Thank you! Your Pentagon WiFi subscription top-up was successful. Enjoy uninterrupted, unlimited browsing.",
-  "registration": "Your Pentagon WiFi profile is active! Kindly pick up your access card at our office next to the Ecobank ATM, GHL Admin Block, 4:00pm to 6:00pm (Mon to Fri)."
+  "registration": "Your Pentagon WiFi profile is now active! 🎉 Use your Student ID as your username to log in and start browsing seamlessly.",
+  "guest": "Your Pentagon WiFi guest access is active! Use these credentials to log in and browse:"
 }
 
 const excludeItems = {
