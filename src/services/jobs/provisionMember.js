@@ -26,7 +26,7 @@ const provisionMember = async () => {
         const sale = await findCustomerSale(member);
         if (!sale) return;
 
-        const selectedPlan = dataPlans.MEMBERSHIP;
+        const selectedPlan = dataPlans.DAILY;
         const results = {
             userName: member?.credentials?.userName,
             password: member?.credentials?.password,

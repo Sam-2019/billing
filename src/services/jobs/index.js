@@ -8,23 +8,13 @@ async function startBree() {
     removeCompleted: true,
     root: path.resolve("./src/services/jobs"),
     jobs: [
-      // {
-      //   name: "provisionMember",
-      //   timeout: false,
-      //   interval: "3m",
-      // },
-      // {
-      //   name: "topupMember",
-      //   timeout: false,
-      //   interval: "3m",
-      // },
       {
-        name: "provisionNewMember",
+        name: "provisionMember",
         timeout: false,
-        interval: "3m",
+        interval: "2m",
       },
       {
-        name: "provisionGuest",
+        name: "topupMember",
         timeout: false,
         interval: "3m",
       },

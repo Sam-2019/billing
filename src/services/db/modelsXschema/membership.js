@@ -26,6 +26,7 @@ const dataSchema = new Schema(
     studentId: { type: String, unique: true },
     status: { type: String, default: "disabled" },
     mktID: { type: String, },
+    registrationType: { type: String }
   },
   {
     timestamps: true,
