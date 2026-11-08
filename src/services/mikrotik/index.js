@@ -37,7 +37,7 @@ const pingMikrotik = async () => {
     return await api.connect();
   } catch (err) {
     console.error({ "err": err.message })
-    await ntfy({ payload: "MIKROTIK: PING FAILED" });
+    await ntfy({ payload: `MIKROTIK: ${err.message}` });
   }
 };
 
@@ -49,7 +49,7 @@ const getUsers = async () => {
     return users;
   } catch (err) {
     console.error({ "err": err.message })
-    await ntfy({ payload: "MIKROTIK: PING FAILED" });
+    await ntfy({ payload: "MIKROTIK: ❌ GET USERS" });
   }
 };
 
@@ -68,7 +68,7 @@ const getUser = async (userName) => {
     return modifiedUser(user);
   } catch (err) {
     console.error({ "err": err.message })
-    await ntfy({ payload: "MIKROTIK: PING FAILED" });
+    await ntfy({ payload: "MIKROTIK: ❌ GET USER" });
   }
 };
 
@@ -83,7 +83,7 @@ const disableUser = async (userName) => {
     await api.close();
   } catch (err) {
     console.error({ "err": err.message })
-    await ntfy({ payload: "MIKROTIK: PING FAILED" });
+    await ntfy({ payload: "MIKROTIK: ❌ DISABLE USER" });
   }
 };
 
@@ -98,7 +98,7 @@ const enableUser = async (userName) => {
     await api.close();
   } catch (err) {
     console.error({ "err": err.message })
-    await ntfy({ payload: "MIKROTIK: PING FAILED" });
+    await ntfy({ payload: "MIKROTIK: ❌ ENABLE USER" });
   }
 };
 
@@ -110,13 +110,15 @@ const resetCounter = async (userID) => {
     return true;
   } catch (err) {
     console.error({ "err": err.message })
-    await ntfy({ payload: "MIKROTIK: PING FAILED" });
+    await ntfy({ payload: "MIKROTIK: ❌ RESET COUNTER" });
   }
 };
 
 const createUser = async (userData) => {
   const defaultMikrotikServer = config.mikrotik.server;
   const comment = `Automated-${new Date().toISOString()}`;
+
+  console.log({userData})
 
   try {
     await api.connect();
@@ -134,7 +136,7 @@ const createUser = async (userData) => {
     return modifiedUser(user);
   } catch (err) {
     console.error({ "err": err.message })
-    await ntfy({ payload: "MIKROTIK: PING FAILED" });
+    await ntfy({ payload: "MIKROTIK: ❌ CREATE USER" });
   }
 };
 
@@ -161,7 +163,7 @@ const topupUser = async ({userID, limit}) => {
     return true
   } catch (err) {
     console.error({ "❌ Top-up Error:": err.message });
-    await ntfy({ payload: "MIKROTIK: ❌ TOP_UP ERROR" });
+    await ntfy({ payload: "MIKROTIK: ❌ TOP_UP" });
   }
 }
 
